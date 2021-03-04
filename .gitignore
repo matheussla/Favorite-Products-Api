@@ -7,6 +7,7 @@ node_modules
 
 # BUILD
 /build
+dist
 
 # IDE
 .vscode/*
@@ -25,3 +26,6 @@ yarn-error.log*
 # LOCKS
 package-lock.json
 yarn.lock
+
+# DATABASE
+postgres-data
