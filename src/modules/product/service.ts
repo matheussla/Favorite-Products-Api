@@ -14,12 +14,7 @@ export default class ProductsService {
 
   public async getAll(): Promise<Product | {}> {
     const productsRepository = getCustomRepository(ProductsRepository);
-    let result = await productsRepository
-      .createQueryBuilder('questions')
-      .leftJoinAndSelect('questions.options', 'options.question_id')
-      .getMany();
-
-    result = result.sort(() => Math.random() - 0.5);
+    const result = await productsRepository.find();
 
     return result;
   }
