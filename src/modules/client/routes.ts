@@ -9,7 +9,7 @@ clientsRouter.post('/', clientsController.create);
 
 clientsRouter.get('/', clientsController.getAll);
 
-clientsRouter.get('/:id', clientsController.getAll);
+clientsRouter.get('/:id', clientsController.getById);
 
 clientsRouter.put('/:id', clientsController.update);
 

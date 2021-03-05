@@ -13,14 +13,6 @@ export default class FavoriteController {
     return response.status(201).json(result);
   }
 
-  public async getAll(request: Request, response: Response): Promise<Response> {
-    const favoriteService = new FavoriteService();
-
-    const result = await favoriteService.getAll();
-
-    return response.json(result);
-  }
-
   public async delete(request: Request, response: Response): Promise<Response> {
     const favoriteService = new FavoriteService();
     const { id } = request.params;

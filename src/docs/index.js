@@ -12,16 +12,16 @@ export default {
   },
   tags: [
     {
-      name: 'exams',
-      description: 'Your Exams',
+      name: 'Auth',
+      description: 'Generete Bearer Token, used in header',
     },
     {
-      name: 'questions',
-      description: 'Your Questions',
+      name: 'clients',
+      description: 'Your Clients',
     },
     {
-      name: 'options',
-      description: 'Question Options',
+      name: 'products',
+      description: 'Your Products',
     },
   ],
   schemes: [
@@ -29,12 +29,12 @@ export default {
     'http',
   ],
   paths: {
-    '/exams': {
+    '/generateAuth': {
       post: {
         tags: [
-          'exams',
+          'Auth',
         ],
-        summary: 'Add a new exams',
+        summary: 'Generete bearer token',
         description: '',
         consumes: [
           'application/json',
@@ -50,48 +50,26 @@ export default {
             name: 'body',
             required: true,
             schema: {
-              $ref: '#/definitions/Exams',
+              $ref: '#/definitions/Clients',
             },
           },
         ],
         security: [
           {
-            examsquestions_auth: [
-              'write:examss',
-              'read:examss',
-            ],
-          },
-        ],
-      },
-      get: {
-        tags: [
-          'exams',
-        ],
-        summary: 'Get an existing exams',
-        description: '',
-        consumes: [
-          'application/json',
-          'application/xml',
-        ],
-        produces: [
-          'application/xml',
-          'application/json',
-        ],
-        security: [
-          {
-            examsquestions_auth: [
-              'write:examss',
-              'read:examss',
+            clientsproducts_auth: [
+              'write:clientss',
+              'read:clientss',
             ],
           },
         ],
       },
     },
-    '/exams/:id': {
-      put: {
+    '/clients': {
+      post: {
         tags: [
-          'exams',
+          'clients',
         ],
+        summary: 'Add a new clients',
         description: '',
         consumes: [
           'application/json',
@@ -107,16 +85,24 @@ export default {
             name: 'body',
             required: true,
             schema: {
-              $ref: '#/definitions/Exams',
+              $ref: '#/definitions/Clients',
             },
+          },
+        ],
+        security: [
+          {
+            clientsproducts_auth: [
+              'write:clientss',
+              'read:clientss',
+            ],
           },
         ],
       },
       get: {
         tags: [
-          'exams',
+          'clients',
         ],
-        summary: 'Get an existing exams',
+        summary: 'Get an existing clients',
         description: '',
         consumes: [
           'application/json',
@@ -128,16 +114,53 @@ export default {
         ],
         security: [
           {
-            examsquestions_auth: [
-              'write:examss',
-              'read:examss',
+            clientsproducts_auth: [
+              'write:clientss',
+              'read:clientss',
             ],
           },
         ],
       },
+    },
+    '/favoriteProduct/add': {
+      post: {
+        tags: [
+          'clients',
+        ],
+        summary: 'Add favorite product in client',
+        description: '',
+        consumes: [
+          'application/json',
+          'application/xml',
+        ],
+        produces: [
+          'application/xml',
+          'application/json',
+        ],
+        parameters: [
+          {
+            in: 'body',
+            name: 'body',
+            required: true,
+            schema: {
+              $ref: '#/definitions/AddFavoriteProduct',
+            },
+          },
+        ],
+        security: [
+          {
+            clientsproducts_auth: [
+              'write:clientss',
+              'read:clientss',
+            ],
+          },
+        ],
+      },
+    },
+    '/favoriteProduct/:id': {
       delete: {
         tags: [
-          'exams',
+          'clients',
         ],
         summary: '/:id',
         description: '',
@@ -151,18 +174,90 @@ export default {
         ],
         security: [
           {
-            examsquestions_auth: [
-              'write:examss',
-              'read:examss',
+            clientsproducts_auth: [
+              'write:clientss',
+              'read:clientss',
             ],
           },
         ],
       },
     },
-    '/questions': {
+    '/clients/:id': {
+      put: {
+        tags: [
+          'clients',
+        ],
+        description: '',
+        consumes: [
+          'application/json',
+          'application/xml',
+        ],
+        produces: [
+          'application/xml',
+          'application/json',
+        ],
+        parameters: [
+          {
+            in: 'body',
+            name: 'body',
+            required: true,
+            schema: {
+              $ref: '#/definitions/Clients',
+            },
+          },
+        ],
+      },
       get: {
         tags: [
-          'questions',
+          'clients',
+        ],
+        summary: 'Get an existing clients',
+        description: '',
+        consumes: [
+          'application/json',
+          'application/xml',
+        ],
+        produces: [
+          'application/xml',
+          'application/json',
+        ],
+        security: [
+          {
+            clientsproducts_auth: [
+              'write:clientss',
+              'read:clientss',
+            ],
+          },
+        ],
+      },
+      delete: {
+        tags: [
+          'clients',
+        ],
+        summary: '/:id',
+        description: '',
+        consumes: [
+          'application/json',
+          'application/xml',
+        ],
+        produces: [
+          'application/xml',
+          'application/json',
+        ],
+        security: [
+          {
+            clientsproducts_auth: [
+              'write:clientss',
+              'read:clientss',
+            ],
+          },
+        ],
+      },
+    },
+    '/products': {
+      get: {
+        tags: [
+          'products',
         ],
         produces: [
           'application/json',
@@ -171,7 +266,7 @@ export default {
       },
       post: {
         tags: [
-          'questions',
+          'products',
         ],
         produces: [
           'application/xml',
@@ -181,19 +276,19 @@ export default {
           {
             in: 'body',
             name: 'body',
-            description: 'order placed for purchasing the exams',
+            description: 'order placed for purchasing the clients',
             required: true,
             schema: {
-              $ref: '#/definitions/Questions',
+              $ref: '#/definitions/Products',
             },
           },
         ],
       },
     },
-    '/questions:id': {
+    '/products:id': {
       put: {
         tags: [
-          'questions',
+          'products',
         ],
         description: '/:id',
         produces: [
@@ -206,49 +301,14 @@ export default {
             name: 'body',
             required: true,
             schema: {
-              $ref: '#/definitions/Questions',
+              $ref: '#/definitions/Products',
             },
           },
         ],
       },
       delete: {
         tags: [
-          'questions',
-        ],
-        description: '/:id',
-        produces: [
-          'application/xml',
-          'application/json',
-        ],
-      },
-    },
-    '/options': {
-      post: {
-        tags: [
-          'options',
-        ],
-        description: '',
-        produces: [
-          'application/xml',
-          'application/json',
-        ],
-        parameters: [
-          {
-            in: 'body',
-            name: 'body',
-            description: 'order placed for purchasing the exams',
-            required: true,
-            schema: {
-              $ref: '#/definitions/Options',
-            },
-          },
-        ],
-      },
-    },
-    '/options/:id': {
-      delete: {
-        tags: [
-          'options',
+          'products',
         ],
         description: '/:id',
         produces: [
@@ -259,27 +319,35 @@ export default {
     },
   },
   definitions: {
-    Questions: {
+    Products: {
       type: 'object',
       properties: {
-        id: {
+        price: {
           type: 'integer',
-          format: 'int64',
+          example: '500',
         },
-        exam_id: {
-          type: 'uuid',
-          example: 'uuid Exam id',
-        },
-        statement: {
+        image: {
           type: 'string',
-          example: 'statementTeste',
+          example: 'www.apple.com',
+        },
+        brand: {
+          type: 'string',
+          example: 'Apple',
+        },
+        title: {
+          type: 'string',
+          example: 'Iphone 12',
+        },
+        reviewScore: {
+          type: 'integer',
+          example: '10',
         },
       },
       xml: {
-        name: 'Questions',
+        name: 'Products',
       },
     },
-    Exams: {
+    Clients: {
       type: 'object',
       required: [
         'name',
@@ -287,49 +355,33 @@ export default {
         'type',
       ],
       properties: {
-        id: {
-          type: 'integer',
-          format: 'int64',
-        },
         name: {
           type: 'string',
-          example: 'nameTeste',
+          example: 'Matheus',
         },
-        description: {
+        email: {
           type: 'string',
-          example: 'teste de geografia',
-        },
-        type: {
-          type: 'string',
-          example: 'ONLINE',
+          example: 'matheus@gmail.com',
         },
       },
       xml: {
-        name: 'Exams',
+        name: 'Clients',
       },
     },
-    Options: {
+    AddFavoriteProduct: {
       type: 'object',
       properties: {
-        question_id: {
+        productId: {
           type: 'uuid',
-          example: 'uuid Question id',
+          example: 'uuid Product id',
         },
-        key: {
-          type: 'string',
-          example: 'a',
-        },
-        value: {
-          type: 'string',
-          example: 'valueTeste',
-        },
-        correct: {
-          type: 'boolean',
-          example: true,
+        clientId: {
+          type: 'uuid',
+          example: 'uuid Client id',
         },
       },
       xml: {
-        name: 'Options',
+        name: 'AddFavoriteProduct',
       },
     },
   },

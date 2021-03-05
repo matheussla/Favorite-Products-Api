@@ -39,13 +39,6 @@ export default class FavoritesService {
     return result;
   }
 
-  public async getAll(): Promise<Favorite | {}> {
-    const favoritesRepository = getCustomRepository(FavoritesRepository);
-    const result = await favoritesRepository.find();
-
-    return result;
-  }
-
   public async delete(id: string): Promise<Favorite | {}> {
     const favoritesRepository = getCustomRepository(FavoritesRepository);
 
