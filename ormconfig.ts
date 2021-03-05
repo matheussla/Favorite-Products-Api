@@ -1,4 +1,4 @@
-import process from 'process'
+import process from 'process';
 
 module.exports = {
   type: 'postgres',
@@ -11,6 +11,6 @@ module.exports = {
   entities: ['./src/models/*.ts'],
   migrations: ['./src/database/migrations/*.ts'],
   cli: {
-    migrationsDir: './src/database/migrations'
-  }
-}
+    migrationsDir: './src/database/migrations',
+  },
+};

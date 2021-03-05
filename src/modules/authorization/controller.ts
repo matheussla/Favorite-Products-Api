@@ -10,6 +10,6 @@ export default class AuthorizationController {
 
     const result = await authorizationService.createAuth(body);
 
-    return response.json(result);
+    return response.status(201).json(result);
   }
 }

@@ -1,8 +1,8 @@
 import { getCustomRepository } from 'typeorm';
+import ErrorBuilder from '../../errors/errorBuilder';
 import Product from '../../models/product';
 import ProductDTO from './interface';
 import ProductsRepository from './repository';
-import ErrorBuilder from '../../errors/errorBuilder';
 
 export default class ProductsService {
   public async create(data: ProductDTO): Promise<Product | {}> {

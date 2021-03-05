@@ -10,7 +10,7 @@ export default class ProductsController {
 
     const result = await productsService.create(body);
 
-    return response.json(result);
+    return response.status(201).json(result);
   }
 
   public async getAll(request: Request, response: Response): Promise<Response> {

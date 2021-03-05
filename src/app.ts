@@ -3,8 +3,8 @@ import 'express-async-errors';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import 'reflect-metadata';
-import setupSwagger from './config/swagger';
 import errorHandler from './middlewares/errorHandler';
+import setupSwagger from './config/swagger';
 
 import routes from './routes';
 

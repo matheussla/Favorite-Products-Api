@@ -1,9 +1,9 @@
 import { getCustomRepository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
+import ErrorBuilder from '../../errors/errorBuilder';
+import authConfig from '../../config/authorization';
 import AuthDTO from './interface';
 import ClientsRepository from '../client/repository';
-import authConfig from '../../config/authorization';
-import ErrorBuilder from '../../errors/errorBuilder';
 
 const generateToken = (client) => {
   const { jwt } = authConfig;

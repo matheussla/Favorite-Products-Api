@@ -1,8 +1,9 @@
 import { getCustomRepository } from 'typeorm';
 import Client from '../../models/client';
+import ErrorBuilder from '../../errors/errorBuilder';
 import ClientDTO from './interface';
 import ClientsRepository from './repository';
-import ErrorBuilder from '../../errors/errorBuilder';
+// import ProductsRepository from '../product/repository';
 
 export default class ClientsService {
   public async create(data: ClientDTO): Promise<Client | {}> {
@@ -16,19 +17,17 @@ export default class ClientsService {
 
   public async getAll(): Promise<Client | {}> {
     const clientsRepository = getCustomRepository(ClientsRepository);
-    const result = await clientsRepository
-      .createQueryBuilder('clients')
-      .leftJoinAndSelect('clients.products', 'products')
-      .getMany();
+    const result = await clientsRepository.find();
 
     return result;
   }
 
   public async getById(id: string): Promise<Client | {}> {
     const clientsRepository = getCustomRepository(ClientsRepository);
+    // const productsRepository = getCustomRepository(ProductsRepository);
     const result = await clientsRepository
-      .createQueryBuilder('exams')
-      .leftJoinAndSelect('exams.questions', 'questions.exam_id')
+      .createQueryBuilder('clients')
+      .leftJoinAndSelect('clients.favoriteProducts', 'favoriteProducts.clientId')
       .where(id)
       .getMany();
 

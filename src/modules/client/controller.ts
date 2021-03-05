@@ -10,7 +10,7 @@ export default class ClientsController {
 
     const result = await clientsService.create(body);
 
-    return response.json(result);
+    return response.status(201).json(result);
   }
 
   public async getAll(request: Request, response: Response): Promise<Response> {

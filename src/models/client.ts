@@ -1,14 +1,13 @@
 import {
   Entity, Column, PrimaryGeneratedColumn,
-  CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, Unique,
+  CreateDateColumn, UpdateDateColumn, Unique, OneToMany,
 } from 'typeorm';
 import { IsEmail, IsNotEmpty, Length } from 'class-validator';
-
-import Product from './product';
+import favoriteProduct from './favoriteProduct';
 
 @Entity('clients')
 @Unique(['email'])
-class Exam {
+class Client {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
@@ -22,9 +21,8 @@ class Exam {
   @IsNotEmpty({ message: 'The email is required' })
   email: string
 
-  @ManyToMany(() => Product)
-  @JoinTable()
-  favoriteProducts: Product[]
+  @OneToMany(() => favoriteProduct, (product) => product.clientId)
+  favoriteProducts: favoriteProduct[]
 
   @CreateDateColumn()
   createdAt: Date
@@ -32,4 +30,4 @@ class Exam {
   @UpdateDateColumn()
   updateAt: Date
 }
-export default Exam;
+export default Client;
