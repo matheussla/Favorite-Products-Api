@@ -3,7 +3,29 @@ import Client from '../../models/client';
 import ErrorBuilder from '../../errors/errorBuilder';
 import ClientDTO from './interface';
 import ClientsRepository from './repository';
-// import ProductsRepository from '../product/repository';
+import ProductsRepository from '../product/repository';
+
+const addProductsInClient = async (client: Client): Promise<Object | Client> => {
+  const productsRepository = getCustomRepository(ProductsRepository);
+  const productIds = [];
+  let object = {};
+
+  if (client.favoriteProducts.length > 0) {
+    client.favoriteProducts.map((product) => productIds.push(product.id));
+
+    const products = await productsRepository.findByIds(productIds);
+
+    object = {
+      name: client.name,
+      email: client.email,
+      favoriteProducts: products,
+    };
+
+    return object;
+  }
+
+  return client;
+};
 
 export default class ClientsService {
   public async create(data: ClientDTO): Promise<Client | {}> {
@@ -22,20 +44,21 @@ export default class ClientsService {
     return result;
   }
 
-  public async getById(id: string): Promise<Client | {}> {
+  public async getById(id: string): Promise<Client | Object> {
     const clientsRepository = getCustomRepository(ClientsRepository);
-    // const productsRepository = getCustomRepository(ProductsRepository);
     const result = await clientsRepository
       .createQueryBuilder('clients')
       .leftJoinAndSelect('clients.favoriteProducts', 'favoriteProducts.clientId')
       .where(id)
-      .getMany();
+      .getOne();
 
     if (!result) {
       throw new ErrorBuilder('This Client does not exist', 404);
     }
 
-    return result;
+    const client = await addProductsInClient(result);
+
+    return client;
   }
 
   public async update(id: string, data: ClientDTO): Promise<Client | {}> {

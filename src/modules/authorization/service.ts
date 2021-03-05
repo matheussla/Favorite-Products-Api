@@ -21,7 +21,7 @@ export default class AuthorizationService {
     const client = clientsRepository.findOne({ where: { name, email } });
 
     if (!client) {
-      throw new ErrorBuilder('Could not find client', 404);
+      throw new ErrorBuilder('Could not find Client', 404);
     }
 
     const authToken = generateToken(client);
