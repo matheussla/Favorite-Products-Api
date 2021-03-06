@@ -20,7 +20,6 @@ class Product {
   @Column()
   @ManyToOne(() => Client, (client) => client.id)
   @JoinColumn({ name: 'clientId' })
-  @IsNotEmpty({ message: 'The clientId is required' })
   clientId: string
 
   @CreateDateColumn()

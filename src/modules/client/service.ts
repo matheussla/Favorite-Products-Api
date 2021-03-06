@@ -11,7 +11,7 @@ const addProductsInClient = async (client: Client): Promise<Object | Client> => 
   let object = {};
 
   if (client.favoriteProducts.length > 0) {
-    client.favoriteProducts.map((product) => productIds.push(product.id));
+    client.favoriteProducts.forEach((product) => productIds.push(product.productId));
 
     const products = await productsRepository.findByIds(productIds);
 
@@ -45,12 +45,15 @@ export default class ClientsService {
   }
 
   public async getById(id: string): Promise<Client | Object> {
+    console.log(id);
     const clientsRepository = getCustomRepository(ClientsRepository);
     const result = await clientsRepository
       .createQueryBuilder('clients')
       .leftJoinAndSelect('clients.favoriteProducts', 'favoriteProducts.clientId')
-      .where(id)
+      .where('clients.id = :id', { id })
       .getOne();
+
+    console.log(result);
 
     if (!result) {
       throw new ErrorBuilder('This Client does not exist', 404);

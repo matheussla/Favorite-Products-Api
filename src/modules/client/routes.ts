@@ -2,17 +2,19 @@ import { Router } from 'express';
 
 import ClientsController from './controller';
 
+import authentication from '../../middlewares/authentication';
+
 const clientsRouter = Router();
 const clientsController = new ClientsController();
 
 clientsRouter.post('/', clientsController.create);
 
-clientsRouter.get('/', clientsController.getAll);
+clientsRouter.get('/', authentication, clientsController.getAll);
 
-clientsRouter.get('/:id', clientsController.getById);
+clientsRouter.get('/favoriteProducts/:id', authentication, clientsController.getById);
 
-clientsRouter.put('/:id', clientsController.update);
+clientsRouter.put('/:id', authentication, clientsController.update);
 
-clientsRouter.delete('/:id', clientsController.delete);
+clientsRouter.delete('/:id', authentication, clientsController.delete);
 
 export default clientsRouter;

@@ -18,7 +18,7 @@ export default class AuthorizationService {
   public async createAuth({ name, email }: AuthDTO): Promise<String | {}> {
     const clientsRepository = getCustomRepository(ClientsRepository);
 
-    const client = clientsRepository.findOne({ where: { name, email } });
+    const client = await clientsRepository.findOne({ where: { name, email } });
 
     if (!client) {
       throw new ErrorBuilder('Could not find Client', 404);
@@ -26,6 +26,6 @@ export default class AuthorizationService {
 
     const authToken = generateToken(client);
 
-    return authToken;
+    return { token: authToken };
   }
 }

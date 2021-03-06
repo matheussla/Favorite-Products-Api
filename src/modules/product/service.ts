@@ -9,6 +9,8 @@ export default class ProductsService {
     const productsRepository = getCustomRepository(ProductsRepository);
     const result = productsRepository.create(data);
 
+    await productsRepository.save(result);
+
     return result;
   }
 
@@ -26,16 +28,16 @@ export default class ProductsService {
     return result;
   }
 
-  public delete(id: string): Product | {} {
+  public async delete(id: string): Promise<Product | {}> {
     const productsRepository = getCustomRepository(ProductsRepository);
 
-    const verifyId = productsRepository.findOne(id);
+    const verifyId = await productsRepository.findOne(id);
 
     if (!verifyId) {
       throw new ErrorBuilder('This Client does not exist', 404);
     }
 
-    const result = productsRepository.delete(id);
+    const result = await productsRepository.delete(id);
 
     return result;
   }

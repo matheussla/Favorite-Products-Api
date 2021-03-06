@@ -34,12 +34,12 @@ export default class CreateProducts1614915754059 implements MigrationInterface {
             type: 'int',
           },
           {
-            name: 'created_at',
+            name: 'createdAt',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'update_at',
+            name: 'updateAt',
             type: 'timestamp',
             default: 'now()',
           },

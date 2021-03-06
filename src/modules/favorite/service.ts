@@ -7,9 +7,13 @@ import ClientsRepository from '../client/repository';
 import ProductsRepository from '../product/repository';
 
 const verifyProduct = async (client, productId): Promise<void> => {
-  const products = client.favoriteProducts.find((product) => product.id === productId);
+  const products = [];
 
-  if (products.length > 0) {
+  if (client.favoriteProducts) {
+    products.push(client.favoriteProducts.find((favorite) => favorite.productId === productId));
+  }
+
+  if (products[0]) {
     throw new ErrorBuilder('This Product has already been added to client favorite products list', 400);
   }
 };
@@ -20,7 +24,11 @@ export default class FavoritesService {
     const clientsRepository = getCustomRepository(ClientsRepository);
     const productsRepository = getCustomRepository(ProductsRepository);
 
-    const client = await clientsRepository.findOne({ id: data.clientId });
+    const client = await clientsRepository
+      .createQueryBuilder('clients')
+      .leftJoinAndSelect('clients.favoriteProducts', 'favoriteProducts.clientId')
+      .where('clients.id = :id', { id: data.clientId })
+      .getOne();
     const product = await productsRepository.findOne({ id: data.productId });
 
     if (!client) {

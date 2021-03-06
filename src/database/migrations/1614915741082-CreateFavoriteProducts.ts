@@ -24,12 +24,12 @@ export default class CreateFavoriteProducts1614915741082 implements MigrationInt
             type: 'uuid',
           },
           {
-            name: 'created_at',
+            name: 'createdAt',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'update_at',
+            name: 'updateAt',
             type: 'timestamp',
             default: 'now()',
           },
@@ -45,6 +45,7 @@ export default class CreateFavoriteProducts1614915741082 implements MigrationInt
         referencedColumnNames: ['id'],
         referencedTableName: 'clients',
         onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       }),
     );
   }

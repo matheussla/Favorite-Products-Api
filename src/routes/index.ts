@@ -9,7 +9,7 @@ import authentication from '../middlewares/authentication';
 const routes = Router();
 
 routes.use('/generateAuth', auth);
-routes.use('/clients', authentication, client);
+routes.use('/clients', client);
 routes.use('/products', authentication, product);
 routes.use('/favoriteProduct', authentication, favoriteProduct);
 

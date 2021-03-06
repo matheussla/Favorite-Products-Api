@@ -182,6 +182,31 @@ export default {
         ],
       },
     },
+    '/clients/favoriteProducts/:id': {
+      get: {
+        tags: [
+          'clients',
+        ],
+        summary: 'Get an existing client with your favorite products',
+        description: '',
+        consumes: [
+          'application/json',
+          'application/xml',
+        ],
+        produces: [
+          'application/xml',
+          'application/json',
+        ],
+        security: [
+          {
+            clientsproducts_auth: [
+              'write:clientss',
+              'read:clientss',
+            ],
+          },
+        ],
+      },
+    },
     '/clients/:id': {
       put: {
         tags: [
@@ -204,29 +229,6 @@ export default {
             schema: {
               $ref: '#/definitions/Clients',
             },
-          },
-        ],
-      },
-      get: {
-        tags: [
-          'clients',
-        ],
-        summary: 'Get an existing clients',
-        description: '',
-        consumes: [
-          'application/json',
-          'application/xml',
-        ],
-        produces: [
-          'application/xml',
-          'application/json',
-        ],
-        security: [
-          {
-            clientsproducts_auth: [
-              'write:clientss',
-              'read:clientss',
-            ],
           },
         ],
       },
