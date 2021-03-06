@@ -122,7 +122,7 @@ export default {
         ],
       },
     },
-    '/favoriteProduct/add': {
+    '/clients/favoriteProduct/add': {
       post: {
         tags: [
           'clients',
@@ -157,7 +157,7 @@ export default {
         ],
       },
     },
-    '/favoriteProduct/:id': {
+    '/clients/favoriteProduct/:id': {
       delete: {
         tags: [
           'clients',

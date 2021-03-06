@@ -45,15 +45,12 @@ export default class ClientsService {
   }
 
   public async getById(id: string): Promise<Client | Object> {
-    console.log(id);
     const clientsRepository = getCustomRepository(ClientsRepository);
     const result = await clientsRepository
       .createQueryBuilder('clients')
       .leftJoinAndSelect('clients.favoriteProducts', 'favoriteProducts.clientId')
       .where('clients.id = :id', { id })
       .getOne();
-
-    console.log(result);
 
     if (!result) {
       throw new ErrorBuilder('This Client does not exist', 404);
