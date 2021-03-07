@@ -1,8 +1,6 @@
 export default {
   openapi: '3.0.0',
   info: {
-    title: 'Provas Online',
-    description: 'Documentação do projeto de uma api para realização de provas online',
     version: '1.0.0',
     contact: {
       name: 'Matheus Abreu',

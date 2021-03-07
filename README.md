@@ -14,6 +14,8 @@
  > `docker-compose up`
 
  > `npm i` 
+
+ > `npm run build`
  
  > `npm run typeorm migration:run`
  
@@ -24,6 +26,8 @@
  > `.env`
  
  > `npm i` 
+
+ > `npm run build`
  
  > `npm run dev:server` 
 
